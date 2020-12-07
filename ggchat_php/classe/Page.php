@@ -50,7 +50,7 @@ class Page
 
     $this->doc .= '<div style="box-shadow: rgba(0, 0, 0, 0.3) 9px -5px 84px 21.9939px;" class="topnav" id="myTopnav">
         <a class="button" href="index.php"  >Accueil</a>
-        
+        <a class="button" href="help.php"  >Aide</a>
     
     
         ';//<a href="map.php"  >Carte</a>
