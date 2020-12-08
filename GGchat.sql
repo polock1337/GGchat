@@ -14,9 +14,10 @@ CREATE DATABASE ggchat
 CREATE TABLE public.membre
 (
     id SERIAL,
+	membre_admin BOOLEAN,
     membre_first character varying(50) COLLATE pg_catalog."default",
     membre_last character varying(50) COLLATE pg_catalog."default",
-    membre_email character varying(50) COLLATE pg_catalog."default",
+    membre_email character varying(100) COLLATE pg_catalog."default",
     membre_uid character varying(50) COLLATE pg_catalog."default",
     membre_pwd character varying(262) COLLATE pg_catalog."default",
     CONSTRAINT membre_pkey PRIMARY KEY (id)

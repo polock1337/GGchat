@@ -87,8 +87,9 @@ class Signup extends Page
                             $DbhObject = new Dbh();
 
                             $dbh = $DbhObject->getDbh();
-                            $sql = $dbh->prepare("SELECT * FROM membre WHERE membre_uid=:uid");
+                            $sql = $dbh->prepare("SELECT * FROM membre WHERE membre_uid=:uid OR membre_email=:email");
                             $sql->bindParam(':uid', $uid);
+                            $sql->bindParam(':email', $email);
                             $sql->execute();
                             $data = $sql->fetchAll();
                             $rows = count($data);
@@ -108,8 +109,8 @@ class Signup extends Page
 
 
                                 $sql= $dbh->prepare("INSERT INTO membre 
-                                ( membre_first,membre_last,membre_email,membre_uid,membre_pwd) 
-                                VALUES (:first,:last,:email,:uid,:hashedPwd)");
+                                ( membre_admin,membre_first,membre_last,membre_email,membre_uid,membre_pwd) 
+                                VALUES (false,:first,:last,:email,:uid,:hashedPwd)");
                                 $sql->bindParam(':first', $first);
                                 $sql->bindParam(':last', $last);
                                 $sql->bindParam(':email', $email);

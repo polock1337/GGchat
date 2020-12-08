@@ -51,8 +51,17 @@ class Membre extends Page
             <input type="text" name="userRenew" placeholder="New username">
             <button type="submit" name="submit">Envoyer</button>
             <input name="f_id" type="hidden" value="Rename">
+            </form></div>';
+        if($_SESSION['u_admin'] != null)
+        {
+            $this->doc .= '<label >Add group</label><br />
+            <div class="grid-item"><form class="computerSign" action="membre.php" method="POST" >
+            <input type="text" name="groupName" placeholder="Group name">
+            <button type="submit" name="submit">Envoyer</button>
+            <input name="f_id" type="hidden" value="addGroup">
             </form></div></div>';
-    
+        }
+        $this->doc .= '</div>';
     }
 
 }
