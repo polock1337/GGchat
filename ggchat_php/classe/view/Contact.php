@@ -30,12 +30,11 @@ class Contact extends Page
         $this->doc .= '<table>
         <thead>
         <tr>
-        <th>id</th>
         <th>First name</th>
         <th>Last name</th>
         <th>Email</th>
         <th>Username</th>
-        <th>Password</th>
+        <th></th>
         </tr>
         </thead>
         <tbody>';
@@ -43,9 +42,9 @@ class Contact extends Page
         {
             
             
-            $this->doc .= "<tr><td>". $row["id"] ."</td><td>". $row["membre_first"] .
+            $this->doc .= "<tr><td>". $row["membre_first"] .
             "</td><td>" . $row["membre_last"] ."</td><td>". $row["membre_email"] ."</td><td>".
-             $row["membre_uid"] ."</td><td>". $row["membre_pwd"] ."</td></tr>";
+             $row["membre_uid"] ."</td><td><a class=\"buttonPrivate\" href=\"ChatPrive.php?membre=".$row["membre_uid"]."\">Envoyer un message</a></td></tr>";
 
             
         }
