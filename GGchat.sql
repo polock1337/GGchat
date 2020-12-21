@@ -17,7 +17,7 @@ CREATE DATABASE ggchat
 
 CREATE TABLE public.groupe
 (
-    id integer NOT NULL DEFAULT nextval('groupe_id_seq'::regclass),
+    id SERIAL NOT NULL,
     groupe_nom character varying(50) COLLATE pg_catalog."default",
     CONSTRAINT groupe_pkey PRIMARY KEY (id)
 )
@@ -28,7 +28,7 @@ CREATE TABLE public.groupe
 
 CREATE TABLE public.membre
 (
-    id integer NOT NULL DEFAULT nextval('membre_id_seq'::regclass),
+    id SERIAL NOT NULL,
     membre_admin boolean,
     membre_first character varying(50) COLLATE pg_catalog."default",
     membre_last character varying(50) COLLATE pg_catalog."default",
@@ -44,10 +44,32 @@ CREATE TABLE public.membre
 
 CREATE TABLE public.message_groupe
 (
-    id integer NOT NULL DEFAULT nextval('message_groupe_id_seq'::regclass),
+    id SERIAL NOT NULL,
     groupe_fkey integer,
     membre_fkey integer,
     message_groupe_contenu character varying(255) COLLATE pg_catalog."default",
+    "timestamp" character varying(255) COLLATE pg_catalog."default",
+    CONSTRAINT groupe_fkey FOREIGN KEY (groupe_fkey)
+        REFERENCES public.groupe (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT membre_fkey FOREIGN KEY (membre_fkey)
+        REFERENCES public.membre (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+-- Table: public.message_groupe_archive
+
+-- DROP TABLE public.message_groupe_archive;
+
+CREATE TABLE public.message_groupe_archive
+(
+    id SERIAL NOT NULL,
+    groupe_fkey integer,
+    membre_fkey integer,
+    message_groupe_contenu character varying(255) COLLATE pg_catalog."default",
+    "timestamp" character varying(255) COLLATE pg_catalog."default",
     CONSTRAINT groupe_fkey FOREIGN KEY (groupe_fkey)
         REFERENCES public.groupe (id) MATCH SIMPLE
         ON UPDATE NO ACTION
@@ -64,10 +86,32 @@ CREATE TABLE public.message_groupe
 
 CREATE TABLE public.message_prive
 (
-    id integer NOT NULL DEFAULT nextval('message_prive_id_seq'::regclass),
+    id SERIAL NOT NULL,
     membre_envoyeur_fkey integer,
     membre_receveur_fkey integer,
     message_prive_contenu character varying(255) COLLATE pg_catalog."default",
+    "timestamp" character varying(255) COLLATE pg_catalog."default",
+    CONSTRAINT membre_envoyeur_fkey FOREIGN KEY (membre_envoyeur_fkey)
+        REFERENCES public.membre (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT membre_receveur_fkey FOREIGN KEY (membre_receveur_fkey)
+        REFERENCES public.membre (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+-- Table: public.message_prive_archive
+
+-- DROP TABLE public.message_prive_archive;
+
+CREATE TABLE public.message_prive_archive
+(
+    id SERIAL NOT NULL,
+    membre_envoyeur_fkey integer,
+    membre_receveur_fkey integer,
+    message_prive_contenu character varying(255) COLLATE pg_catalog."default",
+    "timestamp" character varying(255) COLLATE pg_catalog."default",
     CONSTRAINT membre_envoyeur_fkey FOREIGN KEY (membre_envoyeur_fkey)
         REFERENCES public.membre (id) MATCH SIMPLE
         ON UPDATE NO ACTION

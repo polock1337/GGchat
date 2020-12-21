@@ -46,7 +46,7 @@ class ChatGroupeDetail extends Page
                 if($group_row['id'])
                 {
                     $sql= $dbh->prepare("INSERT INTO public.message_groupe 
-                    (groupe_fkey,membre_fkey,message_groupe_contenu) VALUES (:group_id,".$_SESSION['u_id'].",:message_groupe_contenu);");
+                    (groupe_fkey,membre_fkey,message_groupe_contenu, timestamp) VALUES (:group_id,".$_SESSION['u_id'].",:message_groupe_contenu, to_char(current_timestamp, 'yyyy-mm-dd hh:mi:ss'));");
                     $sql->bindParam(':group_id',$group_row['id'] );
                     $sql->bindParam(':message_groupe_contenu',$message_groupe_contenu );
     

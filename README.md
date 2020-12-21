@@ -9,3 +9,27 @@ Thème de l'application : Application de chat
 - Antoine
 - Gabriel
 - Jacob
+
+## Commande CRON pour optimisation archivage (Charles) : 
+
+Script dans ggchat_php\classe\checker\Archivage.php
+
+### 1 : Importer le script php sur le serveur
+
+### 2 : Rendre le script php executable
+
+cd path/of/php/script
+
+chmod +x Archivage.php
+
+### 3 : Trouver le chemin vers php (pour étape suivante): 
+
+whereis php
+
+### 4 : CRONTAB
+
+crontab -e
+
+0 0 * * * path/of/php path/of/php/script
+
+ex : 0 0 * * * /usr/local/bin/php /var/scripts/Archivage.php

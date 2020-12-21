@@ -46,7 +46,7 @@ class ChatPrive extends Page
                 if($prive_row['id'])
                 {
                     $sql= $dbh->prepare("INSERT INTO public.message_prive 
-                    (membre_envoyeur_fkey,membre_receveur_fkey,message_prive_contenu) VALUES (".$_SESSION['u_id'].",:membre_receveur_id,:message_prive_contenu);");
+                    (membre_envoyeur_fkey,membre_receveur_fkey,message_prive_contenu, timestamp) VALUES (".$_SESSION['u_id'].",:membre_receveur_id,:message_prive_contenu, to_char(current_timestamp, 'yyyy-mm-dd hh:mi:ss'));");
                     $sql->bindParam(':membre_receveur_id',$prive_row['id'] );
                     $sql->bindParam(':message_prive_contenu',$message_prive_contenu );
                     
