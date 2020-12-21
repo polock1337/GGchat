@@ -27,13 +27,17 @@ class Page
     
     public function htmlHead()
     {
-        $this->doc .= '<!DOCTYPE html>
+		$xmlLocation = "C:\\xampp\htdocs\ggchat_php\classe\xml\options.xml";
+		
+		$xml = Simplexml_load_file($xmlLocation);
+		
+		$this->doc .= '<!DOCTYPE html>
         <html lang="fr"> 
         <head>';
         $this->doc .='
         <title>'.$this->title.'</title>
         <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="style/style.css">
+        <link rel="stylesheet" type="text/css" href="style/'.$xml.'">
         <script src="js/script.js"></script>';
         $this->doc .= '
         </head>
