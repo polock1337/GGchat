@@ -33,3 +33,11 @@ crontab -e
 0 0 * * * path/of/php path/of/php/script
 
 ex : 0 0 * * * /usr/local/bin/php /var/scripts/Archivage.php
+
+## Commande pour Redis (Antoine) :
+
+sudo apt-get install php-redis
+sudo apt install redis-server
+## 2 Crontab
+crontab -e
+0 0 * * * /usr/local/bin/php /var/scripts/UpdateListeSalonRedis.php
