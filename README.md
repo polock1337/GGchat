@@ -12,7 +12,7 @@ Thème de l'application : Application de chat
 
 ## Commande CRON pour optimisation archivage (Charles) : 
 
-Script dans ggchat_php\classe\checker\Archivage.php
+Script dans ggchat_php\optimisations\Archivage.php
 
 ### 1 : Importer le script php sur le serveur
 
