@@ -121,3 +121,13 @@ CREATE TABLE public.message_prive_archive
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 )
+
+CREATE INDEX index_message_groupe_contenu ON message_groupe(message_groupe_contenu)
+CREATE INDEX index_message_groupe_fkey ON message_groupe(groupe_fkey)
+CREATE INDEX index_message_membre_fkey ON message_groupe(membre_fkey)
+
+CREATE INDEX index_message_membre_envoyeur_fkey ON message_prive(membre_envoyeur_fkey)
+CREATE INDEX index_message_membre_receveur_fkey ON message_prive(membre_receveur_fkey)
+CREATE INDEX index_message_prive_contenu ON message_prive(message_prive_contenu)
+
+CREATE VIEW nombre_msg_group AS SELECT COUNT(id) as nombre, groupe_fkey FROM public.message_groupe GROUP BY groupe_fkey;

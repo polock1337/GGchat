@@ -63,7 +63,8 @@ class Page
            $this->doc .='
             <a class="button" href="contact.php" >Contact</a>
             <a class="button" href="membre.php" >Membre</a>
-            <a class="button" href="chatGroupe.php"  >Group Chat</a>';
+            <a class="button" href="chatGroupe.php"  >Group Chat</a>
+            <a class="button" href="statistique.php"  >Stat</a>';
             $this->doc .='<form class="logout"'.$currentPage.'" method="POST">
             <input name="log_id" type="hidden" value="logout">
             <button id="logout" type="submit" name="submit">Logout</button>';
