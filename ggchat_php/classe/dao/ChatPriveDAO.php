@@ -17,7 +17,8 @@ class ChatPriveDAO
 
         return $data;
     }
-    public function insertPriveMsg($id,$message_prive_contenu){
+    
+    public function insertMsgPrive($id,$message_prive_contenu){
         $DbhObject = new Dbh();
         $dbh = $DbhObject->getDbh();
         $sql= $dbh->prepare("INSERT INTO public.message_prive 
@@ -27,6 +28,7 @@ class ChatPriveDAO
 
         $sql->execute();
     }
+    
     public function getMsgPrive($id,$uid)
     {
         
@@ -39,6 +41,7 @@ class ChatPriveDAO
 
         return $data;
     }
+    
     public function getMembreEnvoyeur($membre_envoyeur_fkey)
     {
         $DbhObject = new Dbh();
@@ -50,5 +53,4 @@ class ChatPriveDAO
 
         return $data;
     }
-    
 }

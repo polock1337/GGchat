@@ -8,15 +8,16 @@ use PDO;
 class ChatPrive extends Page
 {
   
-  public $title;
+    public $title;
 
-  public function __construct() // Constructeur demandant 2 paramètres
-  {
-      parent::__construct();
-      
-      $this->title= 'Chat Prive';
+    public function __construct() // Constructeur demandant 2 paramètres
+    {
+        parent::__construct();
+
+        $this->title= 'Chat Prive';
     
-  }
+    }
+    
     public function chatCheck()
     {
         if (isset($_POST['f_id']))
@@ -30,8 +31,6 @@ class ChatPrive extends Page
             //check empty fields 
             if (empty($message_prive_contenu))
             {
-
-
                 header("location: chatPrive.php?=emptyInput&membre=".$_GET["membre"]);
                 exit(); 
             }
@@ -41,7 +40,7 @@ class ChatPrive extends Page
                 
                 if($prive_row['id'])
                 {
-                    $chatPriveDAO->insertPriveMsg($prive_row['id'],$message_prive_contenu);
+                    $chatPriveDAO->insertMsgPrive($prive_row['id'],$message_prive_contenu);
 
                     header("location: chatPrive.php?=MsgSend&membre=".$_GET["membre"]);
                     exit(); 
@@ -53,6 +52,7 @@ class ChatPrive extends Page
             }
         }   
     }
+    
     public function chatPrint()
     {
         $chatPriveDAO = new ChatPriveDAO();
@@ -65,6 +65,7 @@ class ChatPrive extends Page
             $this->doc .= '<div class="chat">';
 
             $reversed = array_reverse($tableau);
+            
             foreach ($reversed as $row) 
             {
                 $data = $chatPriveDAO->getMembreEnvoyeur($row['membre_envoyeur_fkey']);
@@ -73,21 +74,14 @@ class ChatPrive extends Page
                 
                 if (file_exists ($profilePic))
                 {
-
                     $pic= "<img class='chatPic' src='$profilePic' alt='Profile picture'>";
-
                 }
                 else
                 {
-
                     $pic="<img class='chatPic' src='img/compte_img.png' alt='Profile picture'>" ;
-
                 }
                 $name = "<a>".$data['membre_uid']."</a>";
                 $this->doc .= "<p>".$name.$pic." : ".$row["message_prive_contenu"]."</p>";
-            
-                
-                
             }
             $this->doc.='</div>';
         }
@@ -96,9 +90,9 @@ class ChatPrive extends Page
             exit(); 
         }
     }
+    
     public function chatInput()
     {
-
         $this->doc .= '<form class="globalChatInput" action="chatPrive.php?membre='.$_GET["membre"].'" method="POST" >
             <input type="text" name="textGlobal" id="txt_1" placeholder="Envoyer un message"  >
             <button type="submit" name="submit">Envoyer</button>
