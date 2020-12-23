@@ -11,14 +11,13 @@ class Options extends Page
 {
 	public $title;
 	
-	public function __construct() // Constructeur demandant 2 paramĂ¨tres
+	public function __construct()
 	{
-		parent::__construct();
 		$this->title='Options';
 	}
 	public function OptionsContenu()
 	{
-		$xmlLocation = "C:\\xampp\htdocs\ggchat_php\classe\xml\options.xml";
+		$xmlLocation = "classe\xml\options.xml";
 		
 		$xml = Simplexml_load_file($xmlLocation);
 		
@@ -27,12 +26,12 @@ class Options extends Page
 		<form action="classe\xml\SaveOptions.php" method="post">
 		<input type="radio" name="Theme" value="style.css"';
 		if ($xml == 'style.css')
-			{echo $this->doc .=' checked';}
+			{$this->doc .=' checked';}
 		$this->doc .='
 		>Dark
 		<input type="radio" name="Theme"';
 		if ($xml == 'altStyle.css')
-			{echo $this->doc .="checked";}
+			{$this->doc .="checked";}
 		$this->doc .='
 		value="altStyle.css">light
 		<input type="submit" value="sauvegarder"></form>';

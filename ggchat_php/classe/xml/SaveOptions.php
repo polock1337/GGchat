@@ -2,7 +2,7 @@
 namespace GChat\classe\xml;
 
 
-		$xml_file_name = "C:\\xampp\htdocs\ggchat_php\classe\xml\options.xml";
+		$xml_file_name = "options.xml";
 			
 		$file = fopen($xml_file_name, "w") or die("wtf");
 		$xml = '<?xml version="1.0" encoding="UTF-8"?>';
@@ -10,7 +10,6 @@ namespace GChat\classe\xml;
 		$xml = '<theme>'.$_POST["Theme"].'</theme>';
 		fwrite($file,$xml);
 		fclose($file);
-			
 		
 header('Location: ../../../../ggchat_php');
 exit();
