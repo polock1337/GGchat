@@ -27,7 +27,7 @@ class Page
     
     public function htmlHead()
     {
-		$xmlLocation = "C:\\xampp\htdocs\ggchat_php\classe\xml\options.xml";
+		$xmlLocation = "classe\xml\options.xml";
 		
 		$xml = Simplexml_load_file($xmlLocation);
 		
