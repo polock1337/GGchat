@@ -92,7 +92,9 @@ class Page
             <input type="text" name="uid" placeholder="Username/e-mail">
             <input type="password" name="pwd" placeholder="password">
             <input name="log_id" type="hidden" value="login">
-            <button name="submit" type="submit">login</button></form>';
+            <button name="submit" type="submit">login</button></form>
+			<a  href="options.php"><img src="img/settings.png" style ="width:5%; float:right;"/></a>
+			';
         } 
      
         $this->doc .=     '
