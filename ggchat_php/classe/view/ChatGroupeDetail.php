@@ -2,7 +2,7 @@
 namespace GGChat\classe;
 
 use GGChat\classe\Page;
-use GGChat\includes\Dbh;
+use GGChat\classe\dao\ChatGroupeDetailDAO;
 use PDO;
 
 class ChatGroupeDetail extends Page
@@ -19,6 +19,7 @@ class ChatGroupeDetail extends Page
   }
     public function chatCheck()
     {
+        $chatGroupeDetailDAO = new ChatGroupeDetailDAO();
         if (isset($_POST['f_id']))
         {
             include_once 'includes/dbh.inc.php';
@@ -37,20 +38,12 @@ class ChatGroupeDetail extends Page
             }
             else
             {
-                $DbhObject = new Dbh();
+                $group_row = $chatGroupeDetailDAO->getGroupeWhereNom($_GET["groupe"]);
 
-                $dbh = $DbhObject->getDbh();
-
-                $stmt = $dbh->query("SELECT id FROM groupe WHERE groupe_nom='".$_GET["groupe"]."' LIMIT 1"); 
-                $group_row = $stmt->fetch();
                 if($group_row['id'])
                 {
-                    $sql= $dbh->prepare("INSERT INTO public.message_groupe 
-                    (groupe_fkey,membre_fkey,message_groupe_contenu, timestamp) VALUES (:group_id,".$_SESSION['u_id'].",:message_groupe_contenu, to_char(current_timestamp, 'yyyy-mm-dd hh:mi:ss'));");
-                    $sql->bindParam(':group_id',$group_row['id'] );
-                    $sql->bindParam(':message_groupe_contenu',$message_groupe_contenu );
-    
-                    $sql->execute();
+                    $insertMessageGroupe = $chatGroupeDetailDAO->insertMessageGroupe($group_row['id'],$message_groupe_contenu);
+
                     header("location: chatGroupeDetail.php?=MsgSend&groupe=".$_GET["groupe"]);
                     exit(); 
                 }
@@ -63,28 +56,19 @@ class ChatGroupeDetail extends Page
     }
     public function chatPrint()
     {
-        //header("Refresh:5");
 
-        $DbhObject = new Dbh();
-        $dbh = $DbhObject->getDbh();
-
-        $stmt = $dbh->query("SELECT id FROM groupe WHERE groupe_nom='".$_GET["groupe"]."' LIMIT 1"); 
-        $group_row = $stmt->fetch();
-
+        $chatGroupeDetailDAO = new ChatGroupeDetailDAO();
+        $group_row = $chatGroupeDetailDAO->getGroupeRow($_GET["groupe"]);
+        
         if($group_row)
         {
-            $sql = "SELECT * FROM message_groupe Where groupe_fkey=".$group_row['id'];
-            $comp = $dbh->query($sql);
-            $tableau = $comp->fetchAll(PDO::FETCH_ASSOC);
-
+            $tableau = $chatGroupeDetailDAO->getMessageGroup($group_row);
             $this->doc .= '<div class="chat">';
 
             $reversed = array_reverse($tableau);
             foreach ($reversed as $row) 
             {
-                $sql = "SELECT * FROM membre WHERE id=".$row['membre_fkey'];
-                $comp = $dbh->query($sql);
-                $data = $comp->fetch(PDO::FETCH_ASSOC);
+                $data = $chatGroupeDetailDAO->getMembreWhereId($row);
                 
                 $profilePic='img_user/'.$data['id'].'_img.png';
                 

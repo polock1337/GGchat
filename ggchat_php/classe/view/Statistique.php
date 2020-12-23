@@ -2,6 +2,7 @@
 namespace GGChat\classe;
 
 use GGChat\classe\Page;
+use GGChat\classe\dao\StatistiqueDAO;
 use GGChat\includes\Dbh;
 use PDO;
 
@@ -16,31 +17,20 @@ class Statistique extends Page
       $this->title= 'Statistique';
     
   }
-    
-
     public function listerContenu()
     {
       $stringGroup = "";
       $stringLabel = "";
 
-        $DbhObject = new Dbh();
-        $dbh = $DbhObject->getDbh();
+      $statistiqueDAO = new StatistiqueDAO();
+      $listeContenuGroup = $statistiqueDAO->getNombreMsgGroup();
 
-        $MESSAGE_SQL_CONTENU = "SELECT * FROM nombre_msg_group";
-        $requeteListeContenu = $dbh->prepare($MESSAGE_SQL_CONTENU);
-        $requeteListeContenu->execute();
-        $listeContenuGroup = $requeteListeContenu-> fetchall();
-        //return $listeContenu;
-
-        foreach($listeContenuGroup as $resultat)
-        {
-          $MESSAGE_SQL_CONTENU = "SELECT * FROM groupe WHERE id =".$resultat["groupe_fkey"]." LIMIT 1";
-          $requeteListeContenu = $dbh->prepare($MESSAGE_SQL_CONTENU);
-          $requeteListeContenu->execute();
-          $listeContenuLabel = $requeteListeContenu-> fetch();
-          $stringGroup.="'".$resultat["nombre"]."',";
-          $stringLabel.="'".$listeContenuLabel["groupe_nom"]."',";
-        }
+      foreach($listeContenuGroup as $resultat)
+      {
+        $listeContenuLabel = $statistiqueDAO->getListeContenuLabel($resultat);
+        $stringGroup.="'".$resultat["nombre"]."',";
+        $stringLabel.="'".$listeContenuLabel["groupe_nom"]."',";
+      }
 
         //$this->doc.='<a>test</a>';
 

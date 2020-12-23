@@ -2,7 +2,7 @@
 namespace GGChat\classe;
 
 use GGChat\classe\Page;
-use GGChat\includes\Dbh;
+use GGChat\classe\dao\ChatPriveDAO;
 use PDO;
 
 class ChatPrive extends Page
@@ -21,8 +21,8 @@ class ChatPrive extends Page
     {
         if (isset($_POST['f_id']))
         {
-            include_once 'includes/dbh.inc.php';
-
+            $chatPriveDAO = new ChatPriveDAO();
+            
             $textpg = pg_escape_string($_REQUEST['textGlobal']);
             $message_prive_contenu = htmlspecialchars($textpg);
 
@@ -37,20 +37,12 @@ class ChatPrive extends Page
             }
             else
             {
-                $DbhObject = new Dbh();
-
-                $dbh = $DbhObject->getDbh();
-
-                $stmt = $dbh->query("SELECT id FROM membre WHERE membre_uid='".$_GET["membre"]."' LIMIT 1"); 
-                $prive_row = $stmt->fetch();
+                $prive_row = $chatPriveDAO->getIdWhereMembreUid($_GET["membre"]);
+                
                 if($prive_row['id'])
                 {
-                    $sql= $dbh->prepare("INSERT INTO public.message_prive 
-                    (membre_envoyeur_fkey,membre_receveur_fkey,message_prive_contenu, timestamp) VALUES (".$_SESSION['u_id'].",:membre_receveur_id,:message_prive_contenu, to_char(current_timestamp, 'yyyy-mm-dd hh:mi:ss'));");
-                    $sql->bindParam(':membre_receveur_id',$prive_row['id'] );
-                    $sql->bindParam(':message_prive_contenu',$message_prive_contenu );
-                    
-                    $sql->execute();
+                    $chatPriveDAO->insertPriveMsg($prive_row['id'],$message_prive_contenu);
+
                     header("location: chatPrive.php?=MsgSend&membre=".$_GET["membre"]);
                     exit(); 
                 }
@@ -63,29 +55,20 @@ class ChatPrive extends Page
     }
     public function chatPrint()
     {
-        //header("Refresh:5");
-
-        $DbhObject = new Dbh();
-        $dbh = $DbhObject->getDbh();
-
-        $stmt = $dbh->query("SELECT id FROM membre WHERE membre_uid='".$_GET["membre"]."' LIMIT 1"); 
-        $prive_row = $stmt->fetch();
+        $chatPriveDAO = new ChatPriveDAO();
+        $prive_row = $chatPriveDAO->getIdWhereMembreUid($_GET["membre"]);
 
         if($prive_row)
         {
-            $sql = "SELECT * FROM message_prive Where membre_envoyeur_fkey=".$prive_row['id']." AND membre_receveur_fkey=".$_SESSION['u_id']." OR membre_receveur_fkey=".$prive_row['id']." AND membre_envoyeur_fkey=".$_SESSION['u_id'];
-            $comp = $dbh->query($sql);
-            $tableau = $comp->fetchAll(PDO::FETCH_ASSOC);
+            $tableau = $chatPriveDAO->getMsgPrive($prive_row['id'],$_SESSION['u_id']);
 
             $this->doc .= '<div class="chat">';
 
             $reversed = array_reverse($tableau);
             foreach ($reversed as $row) 
             {
-                $sql = "SELECT * FROM membre WHERE id=".$row['membre_envoyeur_fkey'];
-                $comp = $dbh->query($sql);
-                $data = $comp->fetch(PDO::FETCH_ASSOC);
-                
+                $data = $chatPriveDAO->getMembreEnvoyeur($row['membre_envoyeur_fkey']);
+                            
                 $profilePic='img_user/'.$data['id'].'_img.png';
                 
                 if (file_exists ($profilePic))

@@ -2,7 +2,7 @@
 namespace GGChat\classe\view;
 
 use GGChat\classe\Page;
-use GGChat\includes\Dbh;
+use GGChat\classe\dao\ContactDAO;
 use PDO;
 
 class Contact extends Page
@@ -19,14 +19,8 @@ class Contact extends Page
     }
     public function tableComputer()
     {
+        $contactDAO = new ContactDAO();
         
-        $DbhObject = new Dbh();
-
-        $dbh = $DbhObject->getDbh();
-        
-        $sql = "SELECT * FROM membre";
-        $comp = $dbh->query($sql);
-        $tableau = $comp->fetchAll(PDO::FETCH_ASSOC);
         $this->doc .= '<table>
         <thead>
         <tr>
@@ -38,6 +32,7 @@ class Contact extends Page
         </tr>
         </thead>
         <tbody>';
+        $tableau = $contactDAO->getMembre();
         foreach ($tableau as $row) 
         {
             
