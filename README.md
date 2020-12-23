@@ -1,7 +1,6 @@
-# projet-social-2020-CharlesC1337
+# projet-social-2020-Charles-Antoine-Gabriel-Jacob
 
 Thème de l'application : Application de chat
-
 
 Équipe :
 
@@ -11,6 +10,34 @@ Thème de l'application : Application de chat
 - Jacob
 
 Fiche de remise : https://docs.google.com/presentation/d/1mo011MwXWcd-ysc6iVHE_5Y_kD5_dI9cB26zDSV3Dpo/edit?usp=sharing
+
+## Informations d'installations : 
+
+1. Télécharger le dossier "ggchat_electron4php" présent dans https://github.com/cegepmatane/projet-social-2020-Charles-Antoine-Gabriel-Jacob et le mettre ou vous voulez.
+
+2. Télécharger node.js si pas déjà fait et ouvrir node.js command prompt.
+
+3. Se rendre dans le dossier "ggchat_electron4php" copié précédamment en utilisant les commandes "cd".
+
+4. Faire "npm start" pour démarrer l'application et enjoy! :)
+
+## Informations sur l'application : 
+
+Application fait en php avec electron.
+
+Base de données postgresql sur un serveur vps distant (Celui à antoine).
+
+Pour autres informations voir fiche de remise : https://docs.google.com/presentation/d/1mo011MwXWcd-ysc6iVHE_5Y_kD5_dI9cB26zDSV3Dpo/edit?usp=sharing
+
+## Informations sur la hiéarchie github :
+
+- Le dossier "electron_4_php" est le "template" de electron pour php de base.
+- Le dossier "ggchat_php" est le code php comme tel.
+- Le dossier "ggchat_electron4php" est l'application finale electron.
+- Le dossier Maquette contient les maquettes.
+- Le dossier "OptimisationServeur" contient les optimisations apposées au côté du serveur, donc Charles et Antoine.
+- Le fichier "ggchatlocal.sql" contient l'export sql de la base de donnée fait à la main.
+- Le fichier "ggchat.sql" contient l'export sql de la base de donnée présentement sur le serveur fait à l'aide de la commande "pg_dump".
 
 ## Commande CRON pour optimisation archivage (Charles) : 
 
@@ -40,6 +67,8 @@ ex : 0 0 * * * /usr/local/bin/php /var/scripts/Archivage.php
 
 sudo apt-get install php-redis
 sudo apt install redis-server
-## 2 Crontab
+
+### 2 Crontab
+
 crontab -e
 0 0 * * * /usr/local/bin/php /var/scripts/UpdateListeSalonRedis.php
