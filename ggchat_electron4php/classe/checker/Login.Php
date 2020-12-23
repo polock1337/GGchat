@@ -77,9 +77,8 @@ class Login
                                         $_SESSION['u_last'] = $data['membre_last'];
                                         $_SESSION['u_email'] = $data['membre_email'];
                                         $_SESSION['u_uid'] = $data['membre_uid'];
-
-
-
+                                        $_SESSION['u_admin'] = $data['membre_admin'] ;
+                                        
                                         header("location: index.php?login=succes");
                                         exit();
                                     }

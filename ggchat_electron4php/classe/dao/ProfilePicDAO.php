@@ -1,12 +1,6 @@
 <?php
 namespace GGChat\classe\dao;
 
-$redis = new Redis();
-$redis->connect('192.99.151.9', 6379);
-
-$redis->get('listeSalons');
-
-
 
 class ProfilePicDAO
 {

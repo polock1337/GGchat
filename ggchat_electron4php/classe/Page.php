@@ -27,13 +27,17 @@ class Page
     
     public function htmlHead()
     {
-        $this->doc .= '<!DOCTYPE html>
+		$xmlLocation = "C:\\xampp\htdocs\ggchat_php\classe\xml\options.xml";
+		
+		$xml = Simplexml_load_file($xmlLocation);
+		
+		$this->doc .= '<!DOCTYPE html>
         <html lang="fr"> 
         <head>';
         $this->doc .='
         <title>'.$this->title.'</title>
         <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="style/style.css">
+        <link rel="stylesheet" type="text/css" href="style/'.$xml.'">
         <script src="js/script.js"></script>';
         $this->doc .= '
         </head>
@@ -50,7 +54,7 @@ class Page
 
     $this->doc .= '<div style="box-shadow: rgba(0, 0, 0, 0.3) 9px -5px 84px 21.9939px;" class="topnav" id="myTopnav">
         <a class="button" href="index.php"  >Accueil</a>
-        
+        <a class="button" href="help.php"  >Aide</a>
     
     
         ';//<a href="map.php"  >Carte</a>
@@ -59,7 +63,9 @@ class Page
            $this->doc .='
             <a class="button" href="contact.php" >Contact</a>
             <a class="button" href="membre.php" >Membre</a>
-            <a class="button" href="chatGroupe.php"  >Group Chat</a>';
+            <a class="button" href="chatGroupe.php"  >Group Chat</a>
+            <a class="button" href="statistique.php"  >Statistique</a>
+            <a  href="options.php"><img src="img/settings.png" style ="width:52px; float:right;"/></a>';
             $this->doc .='<form class="logout"'.$currentPage.'" method="POST">
             <input name="log_id" type="hidden" value="logout">
             <button id="logout" type="submit" name="submit">Logout</button>';
@@ -87,7 +93,9 @@ class Page
             <input type="text" name="uid" placeholder="Username/e-mail">
             <input type="password" name="pwd" placeholder="password">
             <input name="log_id" type="hidden" value="login">
-            <button name="submit" type="submit">login</button></form>';
+            <button name="submit" type="submit">login</button></form>
+			
+			';
         } 
      
         $this->doc .=     '

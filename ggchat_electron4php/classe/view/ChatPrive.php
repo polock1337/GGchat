@@ -2,49 +2,47 @@
 namespace GGChat\classe;
 
 use GGChat\classe\Page;
-use GGChat\classe\dao\ChatGroupeDetailDAO;
+use GGChat\classe\dao\ChatPriveDAO;
 use PDO;
 
-class ChatGroupeDetail extends Page
+class ChatPrive extends Page
 {
   
-  public $title;
+    public $title;
 
-  public function __construct() // Constructeur demandant 2 paramètres
-  {
-      parent::__construct();
-      
-      $this->title= 'Groupe Chat détail';
+    public function __construct() // Constructeur demandant 2 paramètres
+    {
+        parent::__construct();
+
+        $this->title= 'Chat Prive';
     
-  }
+    }
+    
     public function chatCheck()
     {
-        $chatGroupeDetailDAO = new ChatGroupeDetailDAO();
         if (isset($_POST['f_id']))
         {
-            include_once 'includes/dbh.inc.php';
-
+            $chatPriveDAO = new ChatPriveDAO();
+            
             $textpg = pg_escape_string($_REQUEST['textGlobal']);
-            $message_groupe_contenu = htmlspecialchars($textpg);
+            $message_prive_contenu = htmlspecialchars($textpg);
 
             //error handler 
             //check empty fields 
-            if (empty($message_groupe_contenu))
+            if (empty($message_prive_contenu))
             {
-
-
-                header("location: chatGroupeDetail.php?=emptyInput&groupe=".$_GET["groupe"]);
+                header("location: chatPrive.php?=emptyInput&membre=".$_GET["membre"]);
                 exit(); 
             }
             else
             {
-                $group_row = $chatGroupeDetailDAO->getGroupeWhereNom($_GET["groupe"]);
-
-                if($group_row['id'])
+                $prive_row = $chatPriveDAO->getIdWhereMembreUid($_GET["membre"]);
+                
+                if($prive_row['id'])
                 {
-                    $insertMessageGroupe = $chatGroupeDetailDAO->insertMessageGroupe($group_row['id'],$message_groupe_contenu);
+                    $chatPriveDAO->insertMsgPrive($prive_row['id'],$message_prive_contenu,$_SESSION['u_id']);
 
-                    header("location: chatGroupeDetail.php?=MsgSend&groupe=".$_GET["groupe"]);
+                    header("location: chatPrive.php?=MsgSend&membre=".$_GET["membre"]);
                     exit(); 
                 }
                 else{
@@ -54,41 +52,36 @@ class ChatGroupeDetail extends Page
             }
         }   
     }
+    
     public function chatPrint()
     {
+        $chatPriveDAO = new ChatPriveDAO();
+        $prive_row = $chatPriveDAO->getIdWhereMembreUid($_GET["membre"]);
 
-        $chatGroupeDetailDAO = new ChatGroupeDetailDAO();
-        $group_row = $chatGroupeDetailDAO->getGroupeRow($_GET["groupe"]);
-        
-        if($group_row)
+        if($prive_row)
         {
-            $tableau = $chatGroupeDetailDAO->getMessageGroup($group_row);
+            $tableau = $chatPriveDAO->getMsgPrive($prive_row['id'],$_SESSION['u_id']);
+
             $this->doc .= '<div class="chat">';
 
             $reversed = array_reverse($tableau);
+            
             foreach ($reversed as $row) 
             {
-                $data = $chatGroupeDetailDAO->getMembreWhereId($row);
-                
+                $data = $chatPriveDAO->getMembreEnvoyeur($row['membre_envoyeur_fkey']);
+                            
                 $profilePic='img_user/'.$data['id'].'_img.png';
                 
                 if (file_exists ($profilePic))
                 {
-
                     $pic= "<img class='chatPic' src='$profilePic' alt='Profile picture'>";
-
                 }
                 else
                 {
-
                     $pic="<img class='chatPic' src='img/compte_img.png' alt='Profile picture'>" ;
-
                 }
                 $name = "<a>".$data['membre_uid']."</a>";
-                $this->doc .= "<p>".$name.$pic." : ".$row["message_groupe_contenu"]."</p>";
-            
-                
-                
+                $this->doc .= "<p>".$name.$pic." : ".$row["message_prive_contenu"]."</p>";
             }
             $this->doc.='</div>';
         }
@@ -97,10 +90,10 @@ class ChatGroupeDetail extends Page
             exit(); 
         }
     }
+    
     public function chatInput()
     {
-
-        $this->doc .= '<form class="globalChatInput" action="chatGroupeDetail.php?groupe='.$_GET["groupe"].'" method="POST" >
+        $this->doc .= '<form class="globalChatInput" action="chatPrive.php?membre='.$_GET["membre"].'" method="POST" >
             <input type="text" name="textGlobal" id="txt_1" placeholder="Envoyer un message"  >
             <button type="submit" name="submit">Envoyer</button>
             <input name="f_id" type="hidden" value="msgSend">
