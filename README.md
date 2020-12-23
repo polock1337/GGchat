@@ -11,6 +11,9 @@ Thème de l'application : Application de chat
 - Jacob
 
 Fiche de remise : https://docs.google.com/presentation/d/1mo011MwXWcd-ysc6iVHE_5Y_kD5_dI9cB26zDSV3Dpo/edit?usp=sharing
+## Vidéo de présentation
+
+https://youtu.be/NY_bjLS_xRw
 
 ## Commande CRON pour optimisation archivage (Charles) : 
 
