@@ -13,7 +13,7 @@ Fiche de remise : https://docs.google.com/presentation/d/1mo011MwXWcd-ysc6iVHE_5
 
 ## Vidéo de présentation
 
-https://youtu.be/NY_bjLS_xRw
+https://youtu.be/cAOY5tcosTw
 
 ## Informations d'installations : 
 
