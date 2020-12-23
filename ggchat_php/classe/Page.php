@@ -64,7 +64,8 @@ class Page
             <a class="button" href="contact.php" >Contact</a>
             <a class="button" href="membre.php" >Membre</a>
             <a class="button" href="chatGroupe.php"  >Group Chat</a>
-            <a class="button" href="statistique.php"  >Stat</a>';
+            <a class="button" href="statistique.php"  >Statistique</a>
+            <a  href="options.php"><img src="img/settings.png" style ="width:52px; float:right;"/></a>';
             $this->doc .='<form class="logout"'.$currentPage.'" method="POST">
             <input name="log_id" type="hidden" value="logout">
             <button id="logout" type="submit" name="submit">Logout</button>';
@@ -93,7 +94,7 @@ class Page
             <input type="password" name="pwd" placeholder="password">
             <input name="log_id" type="hidden" value="login">
             <button name="submit" type="submit">login</button></form>
-			<a  href="options.php"><img src="img/settings.png" style ="width:5%; float:right;"/></a>
+			
 			';
         } 
      

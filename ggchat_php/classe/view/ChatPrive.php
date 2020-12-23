@@ -40,7 +40,7 @@ class ChatPrive extends Page
                 
                 if($prive_row['id'])
                 {
-                    $chatPriveDAO->insertMsgPrive($prive_row['id'],$message_prive_contenu);
+                    $chatPriveDAO->insertMsgPrive($prive_row['id'],$message_prive_contenu,$_SESSION['u_id']);
 
                     header("location: chatPrive.php?=MsgSend&membre=".$_GET["membre"]);
                     exit(); 

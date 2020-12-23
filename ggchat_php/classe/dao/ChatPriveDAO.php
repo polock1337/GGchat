@@ -18,11 +18,11 @@ class ChatPriveDAO
         return $data;
     }
     
-    public function insertMsgPrive($id,$message_prive_contenu){
+    public function insertMsgPrive($id,$message_prive_contenu,$uid){
         $DbhObject = new Dbh();
         $dbh = $DbhObject->getDbh();
         $sql= $dbh->prepare("INSERT INTO public.message_prive 
-        (membre_envoyeur_fkey,membre_receveur_fkey,message_prive_contenu, timestamp) VALUES (".$_SESSION['u_id'].",:membre_receveur_id,:message_prive_contenu, to_char(current_timestamp, 'yyyy-mm-dd hh:mi:ss'));");
+        (membre_envoyeur_fkey,membre_receveur_fkey,message_prive_contenu, timestamp) VALUES (".$uid.",:membre_receveur_id,:message_prive_contenu, to_char(current_timestamp, 'yyyy-mm-dd hh:mi:ss'));");
         $sql->bindParam(':membre_receveur_id',$id );
         $sql->bindParam(':message_prive_contenu',$message_prive_contenu );
 
