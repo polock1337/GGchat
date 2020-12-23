@@ -42,6 +42,7 @@ Pour autres informations voir fiche de remise : https://docs.google.com/presenta
 - Le dossier "OptimisationServeur" contient les optimisations apposées au côté du serveur, donc Charles et Antoine.
 - Le fichier "ggchatlocal.sql" contient l'export sql de la base de donnée fait à la main.
 - Le fichier "ggchat.sql" contient l'export sql de la base de donnée présentement sur le serveur fait à l'aide de la commande "pg_dump".
+- Le fichier "schema_bd.png" correspond au schéma de la base de données.
 
 ## Commande CRON pour optimisation archivage (Charles) : 
 
