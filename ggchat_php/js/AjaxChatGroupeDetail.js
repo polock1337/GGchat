@@ -18,12 +18,16 @@ function $_GET(param) {
 function showGroupChat() {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("chat").innerHTML = this.responseText;
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("chat").insertAdjacentHTML("afterbegin",this.responseText);
+        }
     }
-    };
-    this.groupe = $_GET('groupe');
-    xmlhttp.open("GET","getChatGroupeDetail.php?groupe="+this.groupe,true);
-    xmlhttp.send();
-    
+    if(document.getElementById("chat").innerHTML != "")
+    {
+        this.public_id = document.getElementById("chat").firstChild.id;
+        this.groupe = $_GET('groupe');
+        console.log(this.public_id);
+        xmlhttp.open("GET","getChatGroupeDetail.php?groupe="+this.groupe+"&public_id="+this.public_id,true);
+        xmlhttp.send();
+    }
   }

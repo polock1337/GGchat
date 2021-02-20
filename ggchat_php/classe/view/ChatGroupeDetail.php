@@ -56,7 +56,61 @@ class ChatGroupeDetail extends Page
     }
     public function chatPrint()
     {
+        if(isset($_GET["public_id"]) && isset($_GET["groupe"]))
+        {
+            $this->chatPrintGroupLazy();
+        }
+        else if (isset($_GET["groupe"]))
+        {
+            $this->chatPrintGroup();
+        } 
+    }
+    private function chatPrintGroupLazy()
+    {
+        $chatGroupeDetailDAO = new ChatGroupeDetailDAO();
+        $group_row = $chatGroupeDetailDAO->getGroupeRow($_GET["groupe"]);
+        if($group_row)
+        {
 
+            $lastMessage = $chatGroupeDetailDAO->getLastMessage($group_row['id']);
+            $islastMessagesNotSame = strcmp($lastMessage['public_id'],$_GET['public_id']);
+
+            if($islastMessagesNotSame)
+            {
+                $lastOldMessageID = $chatGroupeDetailDAO->getMessageIdWithPublicId($_GET['public_id']);
+                $lastNewMessageID = $chatGroupeDetailDAO->getMessageIdWithPublicId($lastMessage['public_id']);
+                $lastMessages = $chatGroupeDetailDAO->getMessageBetweenId($group_row['id'],$lastOldMessageID['id'],$lastNewMessageID['id']);
+
+                foreach ($lastMessages as $rowMessage) 
+                {
+                    $membre = $chatGroupeDetailDAO->getMembreWhereId($rowMessage);
+                
+                    $profilePic='img_user/'.$membre['id'].'_img.png';
+                    
+                    if (file_exists ($profilePic))
+                    {
+                        $pic= "<img class='chatPic' src='$profilePic' alt='Profile picture'>";
+                    }
+                    else
+                    {
+                        $pic="<img class='chatPic' src='img/compte_img.png' alt='Profile picture'>" ;
+                    }
+                    $name = "<a>".$membre['membre_uid']."</a>";
+                    $this->doc .= "<p id='".$rowMessage["public_id"]."'>".$name.$pic." : ".$rowMessage["message_groupe_contenu"]."</p>"; 
+                }                
+            }
+            else
+            {
+                http_response_code(204);
+            }
+        }
+        else{
+            header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
+            exit(); 
+        }
+    }
+    private function chatPrintGroup()
+    {
         $chatGroupeDetailDAO = new ChatGroupeDetailDAO();
         $group_row = $chatGroupeDetailDAO->getGroupeRow($_GET["groupe"]);
         
@@ -84,7 +138,7 @@ class ChatGroupeDetail extends Page
 
                 }
                 $name = "<a>".$data['membre_uid']."</a>";
-                $this->doc .= "<p>".$name.$pic." : ".$row["message_groupe_contenu"]."</p>";
+                $this->doc .= "<p id='".$row["public_id"]."'>".$name.$pic." : ".$row["message_groupe_contenu"]."</p>";
             
                 
                 
