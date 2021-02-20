@@ -31,7 +31,7 @@ $PageSignUpPrincipal = new Signup();
 
 $PageSignUpPrincipal->signCheck();
 
-$PageSignUpPrincipal->htmlHead($PageSignUpPrincipal->title);
+$PageSignUpPrincipal->htmlHead();
 
 $PageSignUpPrincipal->htmlTopNav('signup.php');
 

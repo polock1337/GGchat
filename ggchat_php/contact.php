@@ -36,7 +36,7 @@ $LogoutTopNav->check();//check pour le logout submit
 
 $PageContactPrincipal = new Contact(); 
 
-$PageContactPrincipal->htmlHead($PageContactPrincipal->title);
+$PageContactPrincipal->htmlHead();
 
 $PageContactPrincipal->htmlTopNav('contact.php');
 

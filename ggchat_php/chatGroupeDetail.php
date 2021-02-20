@@ -33,12 +33,13 @@ $PageChatPrincipal = new ChatGroupeDetail();
 
 $PageChatPrincipal->chatCheck();
 
-$PageChatPrincipal->htmlHead($PageChatPrincipal->title);
+$PageChatPrincipal->htmlHead("<script src='js/AjaxChatGroupeDetail.js'></script>");
 
 $PageChatPrincipal->htmlTopNav('chatGroupeDetail.php');
 
-
+$PageChatPrincipal->chatOpen();
 $PageChatPrincipal->chatPrint();
+$PageChatPrincipal->chatClose();
 
 $PageChatPrincipal->chatInput();
 

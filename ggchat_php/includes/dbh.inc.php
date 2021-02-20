@@ -12,11 +12,11 @@ class Dbh
     }
     public function getDbh()
     {
-        $dsn = 'pgsql:dbname=ggchat;host=192.99.151.9';
+        $dsn = 'pgsql:dbname=ggchat;host=localhost';
         $user = 'postgres';
-        $password = 'pol5050';
+        $password = 'Polock1234';
         $dbh = new PDO($dsn, $user, $password);
-        $conn = pg_pconnect("host=192.99.151.9 port=5432 dbname=ggchat user=postgres password=pol5050");
+        $conn = pg_pconnect("host=localhost port=5432 dbname=ggchat user=postgres password=Polock1234");
         return $dbh;
     }
 

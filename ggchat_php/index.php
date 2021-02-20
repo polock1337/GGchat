@@ -30,7 +30,7 @@ $LogoutTopNav->check();//check pour le logout submit
 
 $PageIndexPrincipal = new Index(); 
 
-$PageIndexPrincipal->htmlHead($PageIndexPrincipal->title);
+$PageIndexPrincipal->htmlHead();
 
 $PageIndexPrincipal->htmlTopNav('index.php');
 

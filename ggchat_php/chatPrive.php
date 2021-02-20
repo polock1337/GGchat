@@ -32,7 +32,7 @@ $PageChatPrincipal = new ChatPrive();
 
 $PageChatPrincipal->chatCheck();
 
-$PageChatPrincipal->htmlHead($PageChatPrincipal->title);
+$PageChatPrincipal->htmlHead();
 
 $PageChatPrincipal->htmlTopNav('chatPrive.php');
 

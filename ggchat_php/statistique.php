@@ -30,7 +30,7 @@ $LogoutTopNav->check();//check pour le logout submit
 $PageChatPrincipal = new Statistique(); 
 
 
-$PageChatPrincipal->htmlHead($PageChatPrincipal->title);
+$PageChatPrincipal->htmlHead();
 
 $PageChatPrincipal->htmlTopNav('statistique.php');
 

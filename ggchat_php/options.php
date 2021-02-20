@@ -30,7 +30,7 @@ $LogoutTopNav->check();//check pour le logout submit
 
 $PageOptionsPrincipal = new Options(); 
 
-$PageOptionsPrincipal->htmlHead($PageOptionsPrincipal->title);
+$PageOptionsPrincipal->htmlHead();
 
 $PageOptionsPrincipal->htmlTopNav('options.php');
 

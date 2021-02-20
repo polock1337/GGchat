@@ -63,7 +63,6 @@ class ChatGroupeDetail extends Page
         if($group_row)
         {
             $tableau = $chatGroupeDetailDAO->getMessageGroup($group_row);
-            $this->doc .= '<div class="chat">';
 
             $reversed = array_reverse($tableau);
             foreach ($reversed as $row) 
@@ -90,12 +89,22 @@ class ChatGroupeDetail extends Page
                 
                 
             }
-            $this->doc.='</div>';
+            
         }
         else{
             header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
             exit(); 
         }
+    }
+    public function chatOpen()
+    {
+
+        $this->doc .= '<div class="chat" id="chat">';   
+    }
+    public function chatClose()
+    {
+
+        $this->doc.='</div>';    
     }
     public function chatInput()
     {

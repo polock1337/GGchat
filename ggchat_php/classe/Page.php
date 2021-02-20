@@ -25,7 +25,7 @@ class Page
         
     }
     
-    public function htmlHead()
+    public function htmlHead($additionalTag = "")
     {
 		$xmlLocation = "classe\xml\options.xml";
 		
@@ -34,6 +34,7 @@ class Page
 		$this->doc .= '<!DOCTYPE html>
         <html lang="fr"> 
         <head>';
+        $this->doc .= $additionalTag;
         $this->doc .='
         <title>'.$this->title.'</title>
         <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

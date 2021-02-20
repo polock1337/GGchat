@@ -31,7 +31,7 @@ $LogoutTopNav->check();//check pour le logout submit
 $PageChatPrincipal = new ChatGroupe(); 
 
 
-$PageChatPrincipal->htmlHead($PageChatPrincipal->title);
+$PageChatPrincipal->htmlHead();
 
 $PageChatPrincipal->htmlTopNav('chat.php');
 

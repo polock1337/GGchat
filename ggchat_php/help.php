@@ -30,7 +30,7 @@ $LogoutTopNav->check();//check pour le logout submit
 
 $PageHelp = new Help(); 
 
-$PageHelp->htmlHead($PageHelp->title);
+$PageHelp->htmlHead();
 
 $PageHelp->htmlTopNav('help.php');
 
