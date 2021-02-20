@@ -163,9 +163,9 @@ class ChatGroupeDetail extends Page
     public function chatInput()
     {
 
-        $this->doc .= '<form class="globalChatInput" action="chatGroupeDetail.php?groupe='.$_GET["groupe"].'" method="POST" >
+        $this->doc .= '<form class="form" action="chatGroupeDetail.php?groupe='.$_GET["groupe"].'" method="POST" >
             <input type="text" name="textGlobal" id="txt_1" placeholder="Envoyer un message"  >
-            <button type="submit" name="submit">Envoyer</button>
+            <button class="mb-20" type="submit" name="submit">Envoyer</button>
             <input name="f_id" type="hidden" value="msgSend">
             </form>';    
     }

@@ -18,7 +18,7 @@ class Index extends Page
     
    public function contenuPresentation()
     {
-        $this->doc .= '<h1 id="titreSite">Bienvenu sur G.G Chat</h1>';
+        $this->doc .= '<h1 id="titreSite">Bienvenue sur G.G Chat</h1>';
             
        
       

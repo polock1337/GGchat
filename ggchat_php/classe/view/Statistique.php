@@ -38,8 +38,8 @@ class Statistique extends Page
         echo $resultat["nombre"];
        $this->doc.='<ul>';*/
        $this->doc.='<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-       <h1 style="text-align: center; color: white;">Statistique</h1>
-       <h2 style="text-align: center; color: white;">Nombre de messages par groupe de discussion</h2>
+       <h1 style="text-align: center;">Statistique</h1>
+       <h2 style="text-align: center;">Nombre de messages par groupe de discussion</h2>
        <div class="chart-container" style="position: relative; height:20vh; width: 100%; text-align:center">
               <canvas id="graphique" style="display: inline;" ></canvas>
       </div>

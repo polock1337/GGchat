@@ -22,19 +22,28 @@ class Options extends Page
 		$xml = Simplexml_load_file($xmlLocation);
 		
 		$this->doc .= '
-		
-		<form action="classe\xml\SaveOptions.php" method="post">
-		<input type="radio" name="Theme" value="style.css"';
-		if ($xml == 'style.css')
+		<form class="option" action="classe\xml\SaveOptions.php" method="post">
+		<label>Light pink : </label>
+		<input type="radio" name="Theme" value="styleLightPink.css"';
+		if ($xml == 'styleLightPink.css')
 			{$this->doc .=' checked';}
-		$this->doc .='
-		>Dark
+
+		$this->doc .='>
+		<label>Dark : </label>
 		<input type="radio" name="Theme"';
-		if ($xml == 'altStyle.css')
+		if ($xml == 'styleDark.css')
 			{$this->doc .="checked";}
 		$this->doc .='
-		value="altStyle.css">light
+		value="styleDark.css">';
+		$this->doc .='
+		<label>Classic : </label>
+		<input type="radio" name="Theme"';
+		if ($xml == 'styleClassic.css')
+			{$this->doc .="checked";}
+		$this->doc .='
+		value="styleClassic.css">
 		<input type="submit" value="sauvegarder"></form>';
+		
 		
 	}
 }

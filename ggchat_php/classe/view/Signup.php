@@ -139,7 +139,7 @@ class Signup extends Page
     }
     public function signUpHtml()
     {
-        $this->doc .= '<form class="signUp" action="signup.php" method="POST" >
+        $this->doc .= '<form class="form" action="signup.php" method="POST" >
             <input type="text" name="first" placeholder="Firstname">
             <input type="text" name="last" placeholder="Lastname">
             <input type="text" name="email" placeholder="E-mail">
