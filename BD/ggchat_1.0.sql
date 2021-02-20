@@ -35,6 +35,7 @@ CREATE TABLE public.membre
     membre_email character varying(100) COLLATE pg_catalog."default",
     membre_uid character varying(50) COLLATE pg_catalog."default",
     membre_pwd character varying(262) COLLATE pg_catalog."default",
+    
     CONSTRAINT membre_pkey PRIMARY KEY (id)
 )
 
