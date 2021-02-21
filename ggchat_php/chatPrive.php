@@ -32,12 +32,13 @@ $PageChatPrincipal = new ChatPrive();
 
 $PageChatPrincipal->chatCheck();
 
-$PageChatPrincipal->htmlHead();
+$PageChatPrincipal->htmlHead("<script src='js/AjaxChatPriveDetail.js'></script>");
 
 $PageChatPrincipal->htmlTopNav('chatPrive.php');
 
-
+$PageChatPrincipal->chatOpen();
 $PageChatPrincipal->chatPrint();
+$PageChatPrincipal->chatClose();
 
 $PageChatPrincipal->chatInput();
 
